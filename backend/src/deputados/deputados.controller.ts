@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { DeputadosService } from './deputados.service';
 import { CreateDeputadoDto } from './dto/create-deputado.dto';
@@ -21,13 +22,18 @@ export class DeputadosController {
   }
 
   @Get()
-  findAll() {
-    return this.deputadosService.findAll();
+  findAll(@Query('filtro') filtro?: string) {
+    return this.deputadosService.findAll({ filtro });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.deputadosService.findOne(+id);
+  }
+
+  @Get('name/:name')
+  findByName(@Param('name') name: string) {
+    return this.deputadosService.findByName(name);
   }
 
   @Patch(':id')

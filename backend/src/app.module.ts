@@ -6,12 +6,14 @@ import { DesesasModule } from './desesas/desesas.module';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    HttpModule,
     DeputadosModule,
     DesesasModule,
     PrismaModule,
