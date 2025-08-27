@@ -3,12 +3,9 @@ export interface Deputado {
   nome: string;
   siglaUf: string;
   siglaPartido: string;
-  // adicione outros campos conforme necessário
 }
 
-import { Injectable } from '@nestjs/common';
-import { CreateDeputadoDto } from './dto/create-deputado.dto';
-import { UpdateDeputadoDto } from './dto/update-deputado.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
@@ -37,22 +34,39 @@ export class DeputadosService {
   }
 
   async findOne(id: number) {
-    const url = `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}`;
-    const response: AxiosResponse = await firstValueFrom(
-      this.httpService.get(url),
-    );
-    return response.data;
+    try {
+      const url = `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}`;
+      const response: AxiosResponse = await firstValueFrom(
+        this.httpService.get(url),
+      );
+      return response.data;
+    } catch (error) {
+      throw new HttpException(
+        'Error fetching deputado with id ${id}: ${error.message}',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  create(createDeputadoDto: CreateDeputadoDto) {
-    return 'This action adds a new deputado';
-  }
-
-  update(id: number, updateDeputadoDto: UpdateDeputadoDto) {
-    return `This action updates a #${id} deputado`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} deputado`;
+  async findDespesas(
+    id: number,
+    { ano, pagina }: { ano?: string; pagina?: string },
+  ) {
+    try {
+      let url = `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}/despesas`;
+      const params: string[] = [];
+      if (ano) params.push(`ano=${ano}`);
+      if (pagina) params.push(`pagina=${pagina}`);
+      if (params.length) url += '?' + params.join('&');
+      const response: AxiosResponse = await firstValueFrom(
+        this.httpService.get(url),
+      );
+      return response.data;
+    } catch (error) {
+      throw new HttpException(
+        `Error fetching despesas for deputado with id ${id}: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
