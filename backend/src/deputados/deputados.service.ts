@@ -42,7 +42,7 @@ export class DeputadosService {
       return response.data;
     } catch (error) {
       throw new HttpException(
-        'Error fetching deputado with id ${id}: ${error.message}',
+        `Error fetching deputado with id ${id}: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
