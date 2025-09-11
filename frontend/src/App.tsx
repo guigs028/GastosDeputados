@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Importações necessárias para roteamento e componentes
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import DeputadoDetalhes from './pages/DeputadoDetalhes';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    // Router: Habilita o roteamento em toda a aplicação
+    <Router>
+      <div className="App">
+        {/* Routes: Define as rotas da aplicação */}
+        <Routes>
+          {/* Rota raiz: Lista de deputados */}
+          <Route path="/" element={<Home />} />
+          
+          {/* Rota dinâmica: Detalhes do deputado com parâmetro :id */}
+          {/* Exemplo: /deputado/123 -> mostra gastos do deputado ID 123 */}
+          <Route path="/deputado/:id" element={<DeputadoDetalhes />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

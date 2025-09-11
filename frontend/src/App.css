@@ -1,42 +1,117 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ===== ESTILOS GERAIS ===== */
+
+/* Container principal das páginas */
+.container {
+  max-width: 1200px;     /* Largura máxima do conteúdo */
+  margin: 0 auto;        /* Centraliza horizontalmente */
+  padding: 20px;         /* Espaçamento interno */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ===== PÁGINA HOME - FILTROS ===== */
+
+/* Container do campo de filtro */
+.filtro {
+  margin: 20px 0;        /* Espaçamento vertical */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Campo de input para filtrar deputados */
+.filtro input {
+  width: 100%;           /* Largura total disponível */
+  max-width: 400px;      /* Largura máxima */
+  padding: 10px;         /* Espaçamento interno */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  border-radius: 4px;    /* Bordas arredondadas */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* ===== PÁGINA HOME - GRID DE DEPUTADOS ===== */
+
+/* Grid responsivo para os cards dos deputados */
+.deputados-grid {
+  display: grid;                                    /* Layout em grid */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colunas responsivas */
+  gap: 20px;                                        /* Espaçamento entre cards */
+  margin-top: 20px;                                /* Espaçamento superior */
 }
 
-.card {
-  padding: 2em;
+/* Card individual de cada deputado */
+.deputado-card {
+  border: 1px solid #ddd;    /* Borda cinza */
+  border-radius: 8px;        /* Bordas arredondadas */
+  padding: 20px;             /* Espaçamento interno */
+  text-align: center;        /* Texto centralizado */
 }
 
-.read-the-docs {
-  color: #888;
+/* Foto do deputado no card */
+.deputado-card img {
+  width: 100px;              /* Largura fixa */
+  height: 100px;             /* Altura fixa */
+  border-radius: 50%;        /* Formato circular */
+  object-fit: cover;         /* Mantém proporção da imagem */
+}
+
+/* Botão "Ver Gastos" no card */
+.deputado-card button {
+  background-color: #007bff; /* Azul */
+  color: white;              /* Texto branco */
+  border: none;              /* Remove borda padrão */
+  padding: 10px 20px;        /* Espaçamento interno */
+  border-radius: 4px;        /* Bordas arredondadas */
+  cursor: pointer;           /* Cursor de ponteiro */
+}
+
+/* ===== PÁGINA DETALHES - CABEÇALHO ===== */
+
+/* Cabeçalho com informações do deputado */
+.deputado-header {
+  display: flex;             /* Layout flexível */
+  align-items: center;       /* Alinha verticalmente ao centro */
+  gap: 20px;                 /* Espaçamento entre elementos */
+  margin: 20px 0;            /* Espaçamento vertical */
+}
+
+/* Foto do deputado na página de detalhes */
+.deputado-header img {
+  width: 150px;              /* Largura maior que no card */
+  height: 150px;             /* Altura maior que no card */
+  border-radius: 50%;        /* Formato circular */
+  object-fit: cover;         /* Mantém proporção da imagem */
+}
+
+/* ===== PÁGINA DETALHES - LISTA DE DESPESAS ===== */
+
+/* Container da lista de despesas */
+.despesas-list {
+  display: grid;             /* Layout em grid */
+  gap: 15px;                 /* Espaçamento entre despesas */
+}
+
+/* Card individual de cada despesa */
+.despesa-card {
+  border: 1px solid #eee;    /* Borda cinza clara */
+  padding: 15px;             /* Espaçamento interno */
+  border-radius: 4px;        /* Bordas arredondadas */
+}
+
+/* ===== PAGINAÇÃO ===== */
+
+/* Container dos controles de paginação */
+.paginacao {
+  display: flex;             /* Layout flexível */
+  align-items: center;       /* Alinha verticalmente ao centro */
+  gap: 10px;                 /* Espaçamento entre elementos */
+  margin-top: 20px;          /* Espaçamento superior */
+}
+
+/* Botões de paginação */
+.paginacao button {
+  padding: 8px 16px;         /* Espaçamento interno */
+  border: 1px solid #ccc;    /* Borda cinza */
+  background: white;         /* Fundo branco */
+  cursor: pointer;           /* Cursor de ponteiro */
+}
+
+/* Botões desabilitados */
+.paginacao button:disabled {
+  opacity: 0.5;              /* Transparência reduzida */
+  cursor: not-allowed;       /* Cursor de não permitido */
 }
