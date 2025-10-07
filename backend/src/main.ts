@@ -6,7 +6,11 @@ async function bootstrap() {
 
   // Habilita CORS para permitir requisições do frontend
   app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:5174'], // Portas do Vite
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:5175',
+    ], // Portas do Vite
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   });

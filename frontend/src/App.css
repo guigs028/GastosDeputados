@@ -7,20 +7,63 @@
   padding: 20px;         /* Espaçamento interno */
 }
 
+/* Link de voltar */
+.container > a {
+  display: inline-block;      /* Display inline-block */
+  padding: 10px 16px;         /* Espaçamento interno */
+  background: white;          /* Fundo branco */
+  border: 2px solid #667eea;  /* Borda roxa */
+  color: #667eea;             /* Texto roxo */
+  border-radius: 8px;         /* Bordas arredondadas */
+  font-weight: 500;           /* Peso médio */
+  text-decoration: none;      /* Remove sublinhado */
+  transition: all 0.3s ease;  /* Transição suave */
+  margin-bottom: 20px;        /* Espaçamento inferior */
+}
+
+/* Link de voltar em hover */
+.container > a:hover {
+  background: #667eea;        /* Fundo roxo */
+  color: white;               /* Texto branco */
+  transform: translateX(-3px); /* Move para a esquerda */
+}
+
+/* Títulos h2 */
+h2 {
+  color: #2d3748;             /* Cinza escuro */
+  font-size: 1.8rem;          /* Tamanho da fonte */
+  margin: 25px 0 20px 0;      /* Espaçamento */
+  font-weight: 600;           /* Peso semi-bold */
+}
+
 /* ===== PÁGINA HOME - FILTROS ===== */
 
 /* Container do campo de filtro */
 .filtro {
-  margin: 20px 0;        /* Espaçamento vertical */
+  margin: 30px 0;            /* Espaçamento vertical */
 }
 
 /* Campo de input para filtrar deputados */
 .filtro input {
-  width: 100%;           /* Largura total disponível */
-  max-width: 400px;      /* Largura máxima */
-  padding: 10px;         /* Espaçamento interno */
-  border: 1px solid #ccc; /* Borda cinza clara */
-  border-radius: 4px;    /* Bordas arredondadas */
+  width: 100%;               /* Largura total disponível */
+  max-width: 500px;          /* Largura máxima */
+  padding: 14px 20px;        /* Espaçamento interno */
+  border: 2px solid #e2e8f0; /* Borda cinza clara */
+  border-radius: 8px;        /* Bordas arredondadas */
+  font-size: 16px;           /* Tamanho da fonte */
+  transition: all 0.3s ease; /* Transição suave */
+  outline: none;             /* Remove outline padrão */
+}
+
+/* Input de filtro em foco */
+.filtro input:focus {
+  border-color: #667eea;     /* Borda roxa */
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1); /* Sombra roxa */
+}
+
+/* Input de filtro com placeholder */
+.filtro input::placeholder {
+  color: #a0aec0;            /* Cinza claro */
 }
 
 /* ===== PÁGINA HOME - GRID DE DEPUTADOS ===== */
@@ -35,10 +78,20 @@
 
 /* Card individual de cada deputado */
 .deputado-card {
-  border: 1px solid #ddd;    /* Borda cinza */
-  border-radius: 8px;        /* Bordas arredondadas */
-  padding: 20px;             /* Espaçamento interno */
+  background: white;         /* Fundo branco */
+  border: 1px solid #e2e8f0; /* Borda cinza clara */
+  border-radius: 12px;       /* Bordas arredondadas */
+  padding: 25px;             /* Espaçamento interno */
   text-align: center;        /* Texto centralizado */
+  transition: all 0.3s ease; /* Transição suave */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+/* Card de deputado em hover */
+.deputado-card:hover {
+  transform: translateY(-4px); /* Eleva o card */
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2); /* Sombra roxa */
+  border-color: #667eea;     /* Borda roxa */
 }
 
 /* Foto do deputado no card */
@@ -47,16 +100,43 @@
   height: 100px;             /* Altura fixa */
   border-radius: 50%;        /* Formato circular */
   object-fit: cover;         /* Mantém proporção da imagem */
+  margin-bottom: 15px;       /* Espaçamento inferior */
+  border: 3px solid #667eea; /* Borda roxa */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Nome do deputado no card */
+.deputado-card h3 {
+  color: #2d3748;            /* Cinza escuro */
+  margin: 10px 0;            /* Espaçamento vertical */
+  font-size: 1.2rem;         /* Tamanho da fonte */
+}
+
+/* Informações do partido no card */
+.deputado-card p {
+  color: #718096;            /* Cinza médio */
+  margin-bottom: 15px;       /* Espaçamento inferior */
+  font-size: 0.95rem;        /* Tamanho da fonte */
 }
 
 /* Botão "Ver Gastos" no card */
 .deputado-card button {
-  background-color: #007bff; /* Azul */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente roxo */
   color: white;              /* Texto branco */
   border: none;              /* Remove borda padrão */
-  padding: 10px 20px;        /* Espaçamento interno */
-  border-radius: 4px;        /* Bordas arredondadas */
+  padding: 12px 24px;        /* Espaçamento interno */
+  border-radius: 8px;        /* Bordas arredondadas */
   cursor: pointer;           /* Cursor de ponteiro */
+  font-weight: 600;          /* Peso semi-bold */
+  font-size: 0.95rem;        /* Tamanho da fonte */
+  transition: all 0.3s ease; /* Transição suave */
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3); /* Sombra roxa */
+}
+
+/* Botão "Ver Gastos" em hover */
+.deputado-card button:hover {
+  transform: translateY(-2px); /* Eleva o botão */
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); /* Sombra mais forte */
 }
 
 /* ===== PÁGINA DETALHES - CABEÇALHO ===== */
@@ -67,6 +147,31 @@
   align-items: center;       /* Alinha verticalmente ao centro */
   gap: 20px;                 /* Espaçamento entre elementos */
   margin: 20px 0;            /* Espaçamento vertical */
+  padding: 20px;             /* Padding interno */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente roxo */
+  border-radius: 12px;       /* Bordas arredondadas */
+  color: white;              /* Texto branco */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Garante que todos os textos dentro do header sejam brancos */
+.deputado-header h1,
+.deputado-header p,
+.deputado-header div {
+  color: white !important;   /* Força cor branca */
+  margin: 5px 0;             /* Espaçamento entre linhas */
+}
+
+.deputado-header h1 {
+  font-size: 2rem;           /* Tamanho do nome */
+  font-weight: 700;          /* Negrito */
+  margin-bottom: 10px;       /* Espaço abaixo do nome */
+}
+
+.deputado-header p {
+  font-size: 1.1rem;         /* Tamanho do texto */
+  opacity: 0.95;             /* Leve transparência */
+  line-height: 1.6;          /* Espaçamento entre linhas */
 }
 
 /* Foto do deputado na página de detalhes */
@@ -75,6 +180,57 @@
   height: 150px;             /* Altura maior que no card */
   border-radius: 50%;        /* Formato circular */
   object-fit: cover;         /* Mantém proporção da imagem */
+  border: 4px solid white;   /* Borda branca ao redor */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* ===== FILTROS - SELECT ESTILIZADO ===== */
+
+/* Container dos filtros */
+.filtros {
+  margin: 30px 0;            /* Espaçamento vertical */
+  display: flex;             /* Layout flexível */
+  align-items: center;       /* Alinha verticalmente */
+  gap: 15px;                 /* Espaçamento entre elementos */
+}
+
+/* Select customizado e moderno */
+.filtros select {
+  padding: 12px 40px 12px 16px;  /* Espaçamento (espaço extra à direita para a seta) */
+  font-size: 16px;                /* Tamanho da fonte */
+  font-weight: 500;               /* Peso médio */
+  color: #2d3748;                 /* Cor do texto */
+  background-color: white;        /* Fundo branco */
+  border: 2px solid #e2e8f0;      /* Borda cinza clara */
+  border-radius: 8px;             /* Bordas arredondadas */
+  cursor: pointer;                /* Cursor de ponteiro */
+  outline: none;                  /* Remove outline padrão */
+  transition: all 0.3s ease;      /* Transição suave */
+  appearance: none;               /* Remove estilo padrão do navegador */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;   /* Não repete a imagem */
+  background-position: right 12px center; /* Posiciona a seta */
+  background-size: 20px;          /* Tamanho da seta */
+  min-width: 180px;               /* Largura mínima */
+}
+
+/* Select em hover (mouse por cima) */
+.filtros select:hover {
+  border-color: #667eea;          /* Borda roxa */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Sombra roxa */
+}
+
+/* Select em foco (quando clicado) */
+.filtros select:focus {
+  border-color: #667eea;          /* Borda roxa */
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2); /* Sombra roxa mais forte */
+}
+
+/* Opções do select */
+.filtros select option {
+  padding: 10px;                  /* Espaçamento interno */
+  background-color: white;        /* Fundo branco */
+  color: #2d3748;                 /* Cor do texto */
 }
 
 /* ===== PÁGINA DETALHES - LISTA DE DESPESAS ===== */
@@ -83,35 +239,263 @@
 .despesas-list {
   display: grid;             /* Layout em grid */
   gap: 15px;                 /* Espaçamento entre despesas */
+  margin-top: 20px;          /* Espaçamento superior */
 }
 
 /* Card individual de cada despesa */
 .despesa-card {
-  border: 1px solid #eee;    /* Borda cinza clara */
-  padding: 15px;             /* Espaçamento interno */
-  border-radius: 4px;        /* Bordas arredondadas */
-}
-
-/* ===== PAGINAÇÃO ===== */
-
-/* Container dos controles de paginação */
-.paginacao {
-  display: flex;             /* Layout flexível */
-  align-items: center;       /* Alinha verticalmente ao centro */
-  gap: 10px;                 /* Espaçamento entre elementos */
-  margin-top: 20px;          /* Espaçamento superior */
-}
-
-/* Botões de paginação */
-.paginacao button {
-  padding: 8px 16px;         /* Espaçamento interno */
-  border: 1px solid #ccc;    /* Borda cinza */
   background: white;         /* Fundo branco */
-  cursor: pointer;           /* Cursor de ponteiro */
+  border: 1px solid #e2e8f0; /* Borda cinza clara */
+  padding: 20px;             /* Espaçamento interno */
+  border-radius: 8px;        /* Bordas arredondadas */
+  transition: all 0.3s ease; /* Transição suave */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra leve */
 }
 
-/* Botões desabilitados */
-.paginacao button:disabled {
-  opacity: 0.5;              /* Transparência reduzida */
-  cursor: not-allowed;       /* Cursor de não permitido */
+/* Card de despesa em hover */
+.despesa-card:hover {
+  transform: translateY(-2px); /* Eleva o card */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
+  border-color: #667eea;     /* Borda roxa */
+}
+
+/* Título do card de despesa */
+.despesa-card h4 {
+  color: #667eea;            /* Cor roxa */
+  margin-bottom: 12px;       /* Espaçamento inferior */
+  font-size: 1.1rem;         /* Tamanho da fonte */
+}
+
+/* Parágrafos do card de despesa */
+.despesa-card p {
+  margin: 8px 0;             /* Espaçamento vertical */
+  color: #4a5568;            /* Cinza escuro */
+  font-size: 0.95rem;        /* Tamanho da fonte */
+}
+
+/* ===== PAGINAÇÃO - Estilo GitHub/Google ===== */
+
+/* Container principal da paginação */
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 40px 0 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* Container dos números de página */
+.paginacao-numeros {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Botões de navegação (Anterior/Próxima) - Estilo GitHub */
+.paginacao-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: white;
+  color: #586069;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.paginacao-nav:hover:not(:disabled) {
+  background: #f6f8fa;
+  border-color: #d1d5da;
+  color: #0366d6;
+}
+
+.paginacao-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #fafbfc;
+}
+
+.paginacao-icone {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Oculta texto em telas pequenas */
+@media (max-width: 600px) {
+  .paginacao-texto {
+    display: none;
+  }
+  
+  .paginacao-nav {
+    padding: 8px 12px;
+  }
+}
+
+/* Botões de números - Estilo minimalista moderno */
+.paginacao-numero {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background: white;
+  color: #586069;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginacao-numero:hover {
+  background: #f6f8fa;
+  border-color: #d1d5da;
+  color: #0366d6;
+}
+
+/* Página ativa - Destaque roxo personalizado */
+.paginacao-numero.ativo {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+}
+
+.paginacao-numero.ativo:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+}
+
+/* Reticências */
+.paginacao-reticencias {
+  padding: 0 8px;
+  color: #586069;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== GRÁFICOS ===== */
+
+/* Container principal dos gráficos */
+.graficos-container {
+  margin: 40px 0;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Título dos gráficos */
+.graficos-titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Card com o total gasto */
+.total-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.total-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.total-valor {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid com os gráficos */
+.graficos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* Card individual de cada gráfico */
+.grafico-card {
+  background: #fafbfc;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.grafico-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.grafico-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Wrapper para controlar altura dos gráficos */
+.grafico-wrapper {
+  height: 350px;
+  position: relative;
+}
+
+/* Responsividade dos gráficos */
+@media (max-width: 900px) {
+  .graficos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grafico-wrapper {
+    height: 300px;
+  }
+  
+  .total-valor {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .graficos-container {
+    padding: 20px 15px;
+  }
+  
+  .grafico-card {
+    padding: 15px;
+  }
+  
+  .grafico-wrapper {
+    height: 280px;
+  }
 }

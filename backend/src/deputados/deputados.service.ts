@@ -50,13 +50,14 @@ export class DeputadosService {
 
   async findDespesas(
     id: number,
-    { ano, pagina }: { ano?: string; pagina?: string },
+    { ano, pagina, itens }: { ano?: string; pagina?: string; itens?: string },
   ) {
     try {
       let url = `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}/despesas`;
       const params: string[] = [];
       if (ano) params.push(`ano=${ano}`);
       if (pagina) params.push(`pagina=${pagina}`);
+      if (itens) params.push(`itens=${itens}`);
       if (params.length) url += '?' + params.join('&');
       const response: AxiosResponse = await firstValueFrom(
         this.httpService.get(url),

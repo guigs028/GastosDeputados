@@ -20,7 +20,8 @@ export class DeputadosController {
     @Param('id') id: string,
     @Query('ano') ano?: string,
     @Query('pagina') pagina?: string,
+    @Query('itens') itens?: string,
   ) {
-    return this.deputadosService.findDespesas(+id, { ano, pagina });
+    return this.deputadosService.findDespesas(+id, { ano, pagina, itens });
   }
 }

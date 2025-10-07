@@ -4,11 +4,38 @@
 // Baseada na resposta da API de Dados Abertos da Câmara
 export interface Deputado {
   id: number; // ID único do deputado
-  nome: string; // Nome completo do deputado
-  siglaUf: string; // Estado (SP, RJ, MG, etc.)
-  siglaPartido: string; // Partido político (PT, PSDB, etc.)
-  urlFoto?: string; // URL da foto (opcional)
-  email?: string; // Email do deputado (opcional)
+  uri?: string; // URI da API
+  nomeCivil?: string; // Nome civil completo
+  nome?: string; // Nome (para compatibilidade com lista)
+  siglaUf?: string; // Estado (para compatibilidade com lista)
+  siglaPartido?: string; // Partido (para compatibilidade com lista)
+  urlFoto?: string; // URL da foto (para compatibilidade com lista)
+  email?: string; // Email (para compatibilidade com lista)
+  cpf?: string; // CPF do deputado
+  sexo?: string; // Sexo (M/F)
+  dataNascimento?: string; // Data de nascimento
+  ufNascimento?: string; // UF de nascimento
+  municipioNascimento?: string; // Município de nascimento
+  escolaridade?: string; // Escolaridade
+  ultimoStatus?: {
+    id: number;
+    uri: string;
+    nome: string; // Nome eleitoral
+    siglaPartido: string; // Partido atual
+    siglaUf: string; // UF atual
+    urlFoto: string; // Foto oficial
+    email?: string | null;
+    situacao?: string; // Ex: "Exercício"
+    condicaoEleitoral?: string; // Ex: "Titular"
+    gabinete?: {
+      nome: string;
+      predio: string;
+      sala: string;
+      andar: string;
+      telefone: string;
+      email: string;
+    };
+  };
 }
 
 // Interface que define a estrutura de uma despesa/gasto
