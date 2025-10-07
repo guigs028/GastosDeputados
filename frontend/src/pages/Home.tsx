@@ -6,9 +6,11 @@ import type { Deputado } from '../types';
 
 const Home = () => {
   // Estados para gerenciar os dados da página
-  const [deputados, setDeputados] = useState<Deputado[]>([]); // Lista de deputados
+  const [deputados, setDeputados] = useState<Deputado[]>([]); // Lista completa de deputados
   const [loading, setLoading] = useState(true); // Estado de carregamento
   const [filtro, setFiltro] = useState(''); // Texto do filtro de busca
+  const [paginaAtual, setPaginaAtual] = useState(1); // Página atual
+  const deputadosPorPagina = 20; // Quantos deputados mostrar por página
 
   // Hook que executa quando o componente monta ou quando o filtro muda
   useEffect(() => {
@@ -30,6 +32,9 @@ const Home = () => {
         const deputadosData = response.data.dados || response.data;
         setDeputados(deputadosData);
         
+        // Reset para página 1 quando o filtro mudar
+        setPaginaAtual(1);
+        
         console.log('🏛️ Total de deputados carregados:', deputadosData.length);
       } catch (error) {
         // Em caso de erro, exibe no console
@@ -48,6 +53,12 @@ const Home = () => {
   const handleFiltroChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFiltro(e.target.value); // Atualiza o estado do filtro
   };
+
+  // Calcula índices para paginação
+  const indiceUltimoDeputado = paginaAtual * deputadosPorPagina;
+  const indicePrimeiroDeputado = indiceUltimoDeputado - deputadosPorPagina;
+  const deputadosDaPagina = deputados.slice(indicePrimeiroDeputado, indiceUltimoDeputado);
+  const totalPaginas = Math.ceil(deputados.length / deputadosPorPagina);
 
   // Se ainda está carregando, mostra mensagem de loading
   if (loading) return <div>Carregando...</div>;
@@ -69,11 +80,11 @@ const Home = () => {
       </div>
 
       {/* Mostra informação de debug */}
-      <p>🔢 Total de deputados: {deputados.length}</p>
+      <p>🔢 Total de deputados: {deputados.length} | Página {paginaAtual} de {totalPaginas}</p>
 
       {/* Grid com os cards dos deputados */}
       <div className="deputados-grid">
-        {deputados.map((deputado) => (
+        {deputadosDaPagina.map((deputado) => (
           <div key={deputado.id} className="deputado-card">
             {/* Mostra foto apenas se existir */}
             {deputado.urlFoto && (
@@ -87,6 +98,73 @@ const Home = () => {
             </Link>
           </div>
         ))}
+      </div>
+
+      {/* Paginação estilo GitHub */}
+      <div className="paginacao">
+        {/* Botão Anterior */}
+        <button 
+          onClick={() => setPaginaAtual(p => Math.max(1, p - 1))}
+          disabled={paginaAtual === 1}
+          className="paginacao-nav"
+          title="Página anterior"
+        >
+          <span className="paginacao-icone">←</span>
+          <span className="paginacao-texto">Anterior</span>
+        </button>
+
+        {/* Números das páginas */}
+        <div className="paginacao-numeros">
+          {/* Sempre mostra página 1 */}
+          <button
+            onClick={() => setPaginaAtual(1)}
+            className={`paginacao-numero ${paginaAtual === 1 ? 'ativo' : ''}`}
+          >
+            1
+          </button>
+
+          {/* Reticências se necessário */}
+          {paginaAtual > 3 && <span className="paginacao-reticencias">...</span>}
+
+          {/* Páginas ao redor da atual */}
+          {[paginaAtual - 1, paginaAtual, paginaAtual + 1].map((num) => {
+            if (num <= 1 || num > totalPaginas) return null;
+            
+            return (
+              <button
+                key={num}
+                onClick={() => setPaginaAtual(num)}
+                className={`paginacao-numero ${paginaAtual === num ? 'ativo' : ''}`}
+              >
+                {num}
+              </button>
+            );
+          })}
+
+          {/* Reticências antes da última página */}
+          {paginaAtual < totalPaginas - 2 && <span className="paginacao-reticencias">...</span>}
+
+          {/* Sempre mostra última página (se houver mais de 1) */}
+          {totalPaginas > 1 && (
+            <button
+              onClick={() => setPaginaAtual(totalPaginas)}
+              className={`paginacao-numero ${paginaAtual === totalPaginas ? 'ativo' : ''}`}
+            >
+              {totalPaginas}
+            </button>
+          )}
+        </div>
+
+        {/* Botão Próxima */}
+        <button 
+          onClick={() => setPaginaAtual(p => Math.min(totalPaginas, p + 1))}
+          disabled={paginaAtual === totalPaginas}
+          className="paginacao-nav"
+          title="Próxima página"
+        >
+          <span className="paginacao-texto">Próxima</span>
+          <span className="paginacao-icone">→</span>
+        </button>
       </div>
     </div>
   );
