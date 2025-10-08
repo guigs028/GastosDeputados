@@ -453,18 +453,21 @@ h2 {
 /* Grid com os gráficos */
 .graficos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 30px;
   margin-top: 30px;
+  justify-items: center;  /* Centraliza os itens horizontalmente */
 }
 
 /* Card individual de cada gráfico */
 .grafico-card {
   background: #fafbfc;
   border-radius: 12px;
-  padding: 25px;
+  padding: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 600px;  /* Largura máxima para melhor visualização */
 }
 
 .grafico-card:hover {
@@ -473,17 +476,20 @@ h2 {
 }
 
 .grafico-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #2d3748;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
 /* Wrapper para controlar altura dos gráficos */
 .grafico-wrapper {
-  height: 350px;
+  height: 400px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Responsividade dos gráficos */

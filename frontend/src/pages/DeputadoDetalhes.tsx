@@ -17,6 +17,10 @@ const DeputadoDetalhes = () => {
   const [ano, setAno] = useState('2025'); // Ano selecionado para filtrar despesas (2025 atual)
   const [pagina, setPagina] = useState(1); // Página atual para paginação
 
+  // Calcula o total de páginas baseado no total de despesas (100 itens por página padrão da API)
+  const itensPorPagina = 100;
+  const totalPaginas = Math.ceil(todasDespesas.length / itensPorPagina) || 1;
+
   // Hook para carregar dados do deputado (executa apenas quando ID muda)
   useEffect(() => {
     const fetchDeputado = async () => {
@@ -173,9 +177,9 @@ const DeputadoDetalhes = () => {
         </div>
       )}
 
-      {/* Paginação estilo GitHub/Google */}
+      {/* Paginação estilo GitHub (igual à home) */}
       <div className="paginacao">
-        {/* Botão Anterior com ícone */}
+        {/* Botão Anterior */}
         <button 
           onClick={() => setPagina(p => Math.max(1, p - 1))}
           disabled={pagina === 1}
@@ -186,7 +190,7 @@ const DeputadoDetalhes = () => {
           <span className="paginacao-texto">Anterior</span>
         </button>
 
-        {/* Números das páginas - Estilo GitHub */}
+        {/* Números das páginas */}
         <div className="paginacao-numeros">
           {/* Sempre mostra página 1 */}
           <button
@@ -201,51 +205,37 @@ const DeputadoDetalhes = () => {
 
           {/* Páginas ao redor da atual */}
           {[pagina - 1, pagina, pagina + 1].map((num) => {
-            // Não mostra páginas duplicadas (1 já foi mostrada)
-            if (num <= 1 || num === pagina) return null;
+            if (num <= 1 || num > totalPaginas) return null;
             
             return (
               <button
                 key={num}
                 onClick={() => setPagina(num)}
-                className="paginacao-numero"
+                className={`paginacao-numero ${pagina === num ? 'ativo' : ''}`}
               >
                 {num}
               </button>
             );
           })}
 
-          {/* Página atual se não for 1 */}
-          {pagina > 1 && (
-            <button className="paginacao-numero ativo">
-              {pagina}
-            </button>
-          )}
+          {/* Reticências antes da última página */}
+          {pagina < totalPaginas - 2 && <span className="paginacao-reticencias">...</span>}
 
-          {/* Próximas páginas */}
-          {pagina + 1 > 1 && (
+          {/* Sempre mostra última página (se houver mais de 1) */}
+          {totalPaginas > 1 && (
             <button
-              onClick={() => setPagina(pagina + 1)}
-              className="paginacao-numero"
+              onClick={() => setPagina(totalPaginas)}
+              className={`paginacao-numero ${pagina === totalPaginas ? 'ativo' : ''}`}
             >
-              {pagina + 1}
-            </button>
-          )}
-
-          {despesas.length > 0 && (
-            <button
-              onClick={() => setPagina(pagina + 2)}
-              className="paginacao-numero"
-            >
-              {pagina + 2}
+              {totalPaginas}
             </button>
           )}
         </div>
 
-        {/* Botão Próxima com ícone */}
+        {/* Botão Próxima */}
         <button 
-          onClick={() => setPagina(p => p + 1)}
-          disabled={despesas.length === 0}
+          onClick={() => setPagina(p => Math.min(totalPaginas, p + 1))}
+          disabled={pagina === totalPaginas}
           className="paginacao-nav"
           title="Próxima página"
         >
