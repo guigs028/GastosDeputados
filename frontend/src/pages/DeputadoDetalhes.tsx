@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import type { Deputado, Despesa } from '../types';
 import GraficoGastos from '../components/GraficoGastos';
+import { DeputadoHeaderSkeleton, DespesaCardSkeleton } from '../components/LoadingSkeleton';
 
 const DeputadoDetalhes = () => {
   // Hook para capturar parâmetros da URL (no caso, o ID do deputado)
@@ -98,13 +99,26 @@ const DeputadoDetalhes = () => {
     if (id) fetchDespesas();
   }, [id, ano, pagina]); // Dependências: executa quando qualquer um desses muda
 
-  // Se ainda não carregou os dados do deputado, mostra loading
+  // Loading do deputado (primeira vez que carrega)
   if (!deputado) {
     return (
       <div className="container">
         <Link to="/">← Voltar</Link>
-        <div style={{ textAlign: 'center', padding: '50px' }}>
-          <h2>Carregando dados do deputado...</h2>
+        <DeputadoHeaderSkeleton />
+        
+        <div className="filtros">
+          <select disabled>
+            <option>2025</option>
+          </select>
+        </div>
+
+        <h2>Detalhamento de Depesas - Exercício {ano}</h2>
+        
+        {/* Lista de skeletons de despesas */}
+        <div className="skeleton-list">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <DespesaCardSkeleton key={index} />
+          ))}
         </div>
       </div>
     );
@@ -136,7 +150,7 @@ const DeputadoDetalhes = () => {
           )}
           {/* Mostra situação do deputado */}
           {deputado.ultimoStatus?.situacao && (
-            <p>📊 {deputado.ultimoStatus.situacao}</p>
+            <p><strong>Situação:</strong> {deputado.ultimoStatus.situacao}</p>
           )}
         </div>
       </div>
@@ -158,9 +172,13 @@ const DeputadoDetalhes = () => {
 
       <h2>Despesas - {ano}</h2>
       
-      {/* Lista de despesas com loading condicional */}
+      {/* Loading das despesas (quando muda ano/página) */}
       {loading ? (
-        <div>Carregando despesas...</div>
+        <div className="despesas-list">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <DespesaCardSkeleton key={index} />
+          ))}
+        </div>
       ) : (
         <div className="despesas-list">
           {/* Mapeia cada despesa em um card */}

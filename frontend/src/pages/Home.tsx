@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import type { Deputado } from '../types';
+import { DeputadoCardSkeleton } from '../components/LoadingSkeleton';
 
 const Home = () => {
   // Estados para gerenciar os dados da página
@@ -61,7 +62,29 @@ const Home = () => {
   const totalPaginas = Math.ceil(deputados.length / deputadosPorPagina);
 
   // Se ainda está carregando, mostra mensagem de loading
-  if (loading) return <div>Carregando...</div>;
+  if (loading) {
+    return (
+      <div className="container">
+        <h1>Tranparência nos Gastos Parlamentares</h1>
+        
+        <div className="filtro">
+          <input
+            type="text"
+            placeholder="Buscar por nome, partido ou UF..."
+            disabled
+          />
+        </div>
+
+        {/* Grid de skeletons (simula 12 cards) */}
+        <div className="skeleton-grid">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <DeputadoCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
 
   console.log('🎨 Renderizando página com', deputados.length, 'deputados');
 
