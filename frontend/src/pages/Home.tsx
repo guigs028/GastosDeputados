@@ -67,7 +67,7 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1>Gastos dos Deputados</h1>
+      <h1>Despesas dos Deputados</h1>
       
       {/* Campo de filtro para buscar deputados */}
       <div className="filtro">
@@ -94,7 +94,7 @@ const Home = () => {
             <p>{deputado.siglaPartido} - {deputado.siglaUf}</p>
             {/* Link para página de detalhes do deputado */}
             <Link to={`/deputado/${deputado.id}`}>
-              <button>Ver Gastos</button>
+              <button>Ver Despesas</button>
             </Link>
           </div>
         ))}
