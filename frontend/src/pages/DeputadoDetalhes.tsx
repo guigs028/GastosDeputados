@@ -22,6 +22,10 @@ const DeputadoDetalhes = () => {
   const itensPorPagina = 100;
   const totalPaginas = Math.ceil(todasDespesas.length / itensPorPagina) || 1;
 
+  useEffect(() => {
+  setPagina(1); // Volta para página 1
+    }, [ano]); // Executa quando ano muda
+
   // Hook para carregar dados do deputado (executa apenas quando ID muda)
   useEffect(() => {
     const fetchDeputado = async () => {
@@ -223,7 +227,7 @@ const DeputadoDetalhes = () => {
 
           {/* Páginas ao redor da atual */}
           {[pagina - 1, pagina, pagina + 1].map((num) => {
-            if (num <= 1 || num > totalPaginas) return null;
+            if (num <= 1 || num >= totalPaginas) return null;
             
             return (
               <button

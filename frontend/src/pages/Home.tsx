@@ -151,7 +151,7 @@ const Home = () => {
 
           {/* Páginas ao redor da atual */}
           {[paginaAtual - 1, paginaAtual, paginaAtual + 1].map((num) => {
-            if (num <= 1 || num > totalPaginas) return null;
+            if (num <= 1 || num >= totalPaginas) return null;
             
             return (
               <button
