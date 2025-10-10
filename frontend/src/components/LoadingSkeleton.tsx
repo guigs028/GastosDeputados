@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const DeputadoCardSkeleton = () => {
   return (
     <div className="deputado-card skeleton-container">
