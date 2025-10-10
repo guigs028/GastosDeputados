@@ -10,12 +10,18 @@ async function bootstrap() {
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:5175',
-    ], // Portas do Vite
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      'https://gastos-deputados.vercel.app', // ← Adicione sua URL da Vercel
+      /\.vercel\.app$/, // ← Permite todos os subdomínios do Vercel
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
 
-  await app.listen(process.env.PORT ?? 3000);
+  // Importante: 0.0.0.0 para aceitar conexões externas no Render
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port, '0.0.0.0');
+
+  console.log(`🚀 Backend rodando na porta ${port}`);
 }
 
 // Executa a função bootstrap e trata erros
