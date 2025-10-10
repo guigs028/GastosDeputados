@@ -4,7 +4,7 @@ import axios from "axios";
 // Cria uma instância configurada do axios para comunicação com a API
 const api = axios.create({
   // URL base do backend NestJS - todas as requisições vão para esta URL
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
   timeout: 10000,
 });
 
