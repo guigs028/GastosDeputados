@@ -2,7 +2,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 import { Pie, Bar } from 'react-chartjs-2';
 import type { Despesa } from '../types';
 
-// Registra os componentes necessários do Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 interface GraficoGastosProps {
@@ -13,7 +12,6 @@ interface GraficoGastosProps {
 const GraficoGastos = ({ despesas, ano }: GraficoGastosProps) => {
   console.log('GraficoGastos - despesas recebidas:', despesas.length);
   
-  // Agrupa despesas por tipo e calcula totais
   const gastosPorTipo = despesas.reduce((acc, despesa) => {
     const tipo = despesa.tipoDespesa;
     if (!acc[tipo]) {
@@ -25,23 +23,21 @@ const GraficoGastos = ({ despesas, ano }: GraficoGastosProps) => {
 
   console.log('Gastos por tipo:', gastosPorTipo);
 
-  // Ordena por valor (maior para menor) e pega top 8
   const topGastos = Object.entries(gastosPorTipo)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 8);
 
   console.log('Top 8 gastos:', topGastos);
 
-  // Cores vibrantes para os gráficos (paleta moderna)
   const cores = [
-    '#667eea', // Roxo principal
-    '#764ba2', // Roxo escuro
-    '#f093fb', // Rosa claro
-    '#4facfe', // Azul claro
-    '#43e97b', // Verde
-    '#fa709a', // Rosa
-    '#fee140', // Amarelo
-    '#30cfd0', // Ciano
+    '#667eea',
+    '#764ba2',
+    '#f093fb',
+    '#4facfe',
+    '#43e97b',
+    '#fa709a',
+    '#fee140',
+    '#30cfd0',
   ];
 
   // Dados para o gráfico de pizza

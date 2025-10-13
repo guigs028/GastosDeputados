@@ -1,4 +1,3 @@
-// Importações necessárias do React e bibliotecas
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
@@ -10,21 +9,20 @@ const DeputadoDetalhes = () => {
   // Hook para capturar parâmetros da URL (no caso, o ID do deputado)
   const { id } = useParams<{ id: string }>();
   
-  // Estados para gerenciar os dados da página
-  const [deputado, setDeputado] = useState<Deputado | null>(null); // Dados do deputado
-  const [despesas, setDespesas] = useState<Despesa[]>([]); // Lista de despesas (paginadas)
-  const [todasDespesas, setTodasDespesas] = useState<Despesa[]>([]); // Todas despesas do ano (para gráficos)
-  const [loading, setLoading] = useState(true); // Estado de carregamento das despesas
-  const [ano, setAno] = useState('2025'); // Ano selecionado para filtrar despesas (2025 atual)
-  const [pagina, setPagina] = useState(1); // Página atual para paginação
+  const [deputado, setDeputado] = useState<Deputado | null>(null);
+  const [despesas, setDespesas] = useState<Despesa[]>([]);
+  const [todasDespesas, setTodasDespesas] = useState<Despesa[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [ano, setAno] = useState('2025');
+  const [pagina, setPagina] = useState(1);
 
-  // Calcula o total de páginas baseado no total de despesas (100 itens por página padrão da API)
   const itensPorPagina = 100;
   const totalPaginas = Math.ceil(todasDespesas.length / itensPorPagina) || 1;
 
+  // Reseta página ao mudar ano
   useEffect(() => {
-  setPagina(1); // Volta para página 1
-    }, [ano]); // Executa quando ano muda
+    setPagina(1);
+  }, [ano]);
 
   // Hook para carregar dados do deputado (executa apenas quando ID muda)
   useEffect(() => {
